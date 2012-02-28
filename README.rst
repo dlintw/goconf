@@ -39,6 +39,7 @@ Config::
   compression = off
 
 Code::
+
   c, err := goconf.ReadConfigFile("something.config")
   c.GetString("default", "host") // return something.com
   c.GetInt("default", "port") // return 443
