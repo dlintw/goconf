@@ -1,9 +1,8 @@
-package conf_test
+package goconf
 
 import (
-	. "conf"
-	"testing"
 	"strconv"
+	"testing"
 )
 
 const confFile = `
@@ -48,7 +47,7 @@ var testSet = []interface{}{
 func TestBuild(t *testing.T) {
 	c, err := ReadConfigBytes([]byte(confFile))
 	if err != nil {
-		t.Error(err.Error())
+		t.Error(err)
 	}
 
 	for _, element := range testSet {

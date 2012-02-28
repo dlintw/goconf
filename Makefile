@@ -1,10 +1,8 @@
-include $(GOROOT)/src/Make.inc
-
-TARG=conf
-GOFILES=\
-        conf.go\
-	get.go\
-	read.go\
-	write.go
-
-include $(GOROOT)/src/Make.pkg
+all:
+	go tool fix *.go
+	go tool vet *.go
+	gofmt -s -w *.go
+	go build
+	go install
+test: all
+	go test

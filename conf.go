@@ -14,7 +14,7 @@
 //
 // To read this configuration file, do:
 //
-//	c, err := conf.ReadConfigFile("server.conf")
+//	c, err := goconf.ReadConfigFile("server.conf")
 //	c.GetString("default", "host")               // returns example.com
 //	c.GetInt("", "port")                         // returns 443 (assumes "default")
 //	c.GetBool("", "php")                         // returns true
@@ -27,14 +27,13 @@
 //
 // Goconfig's string substitution syntax has not been removed. However, it may be
 // taken out or modified in the future.
-package conf
+package goconf
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
-	"fmt"
 )
-
 
 // ConfigFile is the representation of configuration settings.
 // The public interface is entirely through methods.
@@ -78,7 +77,6 @@ var (
 	varRegExp = regexp.MustCompile(`%\(([a-zA-Z0-9_.\-]+)\)s`)
 )
 
-
 // AddSection adds a new section to the configuration.
 // It returns true if the new section was inserted, and false if the section already existed.
 func (c *ConfigFile) AddSection(section string) bool {
@@ -92,7 +90,6 @@ func (c *ConfigFile) AddSection(section string) bool {
 	return true
 }
 
-
 // RemoveSection removes a section from the configuration.
 // It returns true if the section was removed, and false if section did not exist.
 func (c *ConfigFile) RemoveSection(section string) bool {
@@ -104,7 +101,7 @@ func (c *ConfigFile) RemoveSection(section string) bool {
 	case section == DefaultSection:
 		return false // default section cannot be removed
 	default:
-		for o, _ := range c.data[section] {
+		for o := range c.data[section] {
 			delete(c.data[section], o)
 		}
 		delete(c.data, section)
@@ -112,7 +109,6 @@ func (c *ConfigFile) RemoveSection(section string) bool {
 
 	return true
 }
-
 
 // AddOption adds a new option and value to the configuration.
 // It returns true if the option and value were inserted, and false if the value was overwritten.
@@ -128,7 +124,6 @@ func (c *ConfigFile) AddOption(section string, option string, value string) bool
 
 	return !ok
 }
-
 
 // RemoveOption removes a option and value from the configuration.
 // It returns true if the option and value were removed, and false otherwise,
@@ -146,7 +141,6 @@ func (c *ConfigFile) RemoveOption(section string, option string) bool {
 
 	return ok
 }
-
 
 // NewConfigFile creates an empty configuration representation.
 // This representation can be filled with AddSection and AddOption and then
