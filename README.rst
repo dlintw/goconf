@@ -12,12 +12,14 @@ assume your local package path is $HOME/go::
 
   # method 1:
   go get github.com/dlintw/goconf
+  go test github.com/dlintw/goconf # test it
 
   # method 2:
   cd $GOPATH/src
-  hg clone https://github.com/dlintw/goconf.git
+  hg clone https://dlintw@github.com/dlintw/goconf.git
   cd goconf
   make
+  make test # test it
 
 USAGE
 =======
