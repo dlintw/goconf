@@ -72,4 +72,28 @@ Code::
   c.GetBool("service-1", "compression") // returns true
   c.GetBool("service-2", "compression") // returns GetError
 
+Example 3
+---------
+
+Config::
+
+  [default]
+  host = something.com
+  port = 443
+  active = true
+  compression = off
+
+  [service-1]
+  compression = on
+
+  [service-2]
+  port = 444
+
+Code::
+
+  c, err := goconf.ReadConfigFile("something.config")
+  c.GetBoolDefault("default", "compression", true) // returns false
+  c.GetBoolDefault("service-1", "compression", true) // returns true
+  c.GetBoolDefault("service-2", "compression", true) // returns true
+
 .. vi:set et sw=2 ts=2:
