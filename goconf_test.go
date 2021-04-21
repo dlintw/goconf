@@ -82,3 +82,25 @@ func TestBuild(t *testing.T) {
 		}
 	}
 }
+
+func TestDefaults(t *testing.T) {
+	c, err := ReadConfigBytes([]byte(confFile))
+	if err != nil {
+		t.Error(err)
+	}
+
+	s := c.GetStringDefault("", "nothere", "foo")
+	if s != "foo" {
+		t.Error("c.GetStringDefault(\"\", \"nothere\", \"foo\") returned incorrect answer")
+	}
+
+	i := c.GetIntDefault("", "nothere", 1)
+	if i != 1 {
+		t.Error("c.GetIntDefault(\"\", \"nothere\", 1) returned incorrect answer")
+	}
+
+	b := c.GetBoolDefault("", "nothere", true)
+	if b != true {
+		t.Error("c.GetBoolDefault(\"\", \"nothere\", true) returned incorrect answer")
+	}
+}
