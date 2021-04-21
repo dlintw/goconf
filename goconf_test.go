@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	. "github.com/shopsmart/goconf"
+	. "github.com/dlintw/goconf"
 )
 
 const confFile = `
