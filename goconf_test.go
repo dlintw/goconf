@@ -1,8 +1,10 @@
-package goconf
+package goconf_test
 
 import (
 	"strconv"
 	"testing"
+
+	. "github.com/shopsmart/goconf"
 )
 
 const confFile = `
