@@ -178,3 +178,27 @@ func (c *ConfigFile) GetBool(section string, option string) (value bool, err err
 
 	return value, nil
 }
+
+func (c *ConfigFile) GetStringDefault(section string, option string, defaultValue string) string {
+	value, err := c.GetString(section, option)
+	if err != nil {
+		return defaultValue
+	}
+	return value
+}
+
+func (c *ConfigFile) GetIntDefault(section string, option string, defaultValue int) int {
+	value, err := c.GetInt(section, option)
+	if err != nil {
+		return defaultValue
+	}
+	return value
+}
+
+func (c *ConfigFile) GetBoolDefault(section string, option string, defaultValue bool) bool {
+	value, err := c.GetBool(section, option)
+	if err != nil {
+		return defaultValue
+	}
+	return value
+}
